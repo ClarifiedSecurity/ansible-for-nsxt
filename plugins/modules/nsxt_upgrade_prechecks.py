@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -24,10 +24,10 @@ DOCUMENTATION = '''
 ---
 module: nsxt_upgrade_prechecks
 short_description: 'Execute pre-upgrade checks'
-description: "Run pre-defined checks to identify potential issues which can be 
-              encountered during an upgrade or can cause an upgrade to fail. The results 
-              of the checks are added to the respective upgrade units aggregate-info. The 
-              progress and status of operation is part of upgrade status summary of 
+description: "Run pre-defined checks to identify potential issues which can be
+              encountered during an upgrade or can cause an upgrade to fail. The results
+              of the checks are added to the respective upgrade units aggregate-info. The
+              progress and status of operation is part of upgrade status summary of
               individual components."
 version_added: '2.7'
 author: 'Kommireddy Akhilesh'
@@ -55,7 +55,7 @@ options:
         description: "State can be either 'present' or 'absent'.
                       'present' is used to run pre upgrade checks.
                       'absent' is used to abort preupgrade checks."
-        required: true   
+        required: true
 '''
 
 EXAMPLES = '''
@@ -84,7 +84,7 @@ def wait_for_pre_upgrade_checks_to_execute(module, manager_url, endpoint, mgr_us
     - endpoint: API endpoint.
     - attribute_list: The attribute whose value should become the desired attribute value
     - desired_attribute_value: The desired attribute value
-    
+
     Function will wait till the attribute value derived from going deep to attribute list
     becomes equal to desired_attribute_value.
    '''
@@ -92,7 +92,7 @@ def wait_for_pre_upgrade_checks_to_execute(module, manager_url, endpoint, mgr_us
   while True:
     try:
       (rc, resp) = request(manager_url + endpoint, headers=dict(Accept='application/json'),
-                           url_username=mgr_username, url_password=mgr_password, 
+                           url_username=mgr_username, url_password=mgr_password,
                            validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
        pass
@@ -128,8 +128,8 @@ def main():
 
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
-  
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
@@ -137,13 +137,13 @@ def main():
   if state == 'present':
     # Runs pre upgrade checks
     if module.check_mode:
-      module.exit_json(changed=False, debug_out='Pre upgrade checks will be executed.', 
+      module.exit_json(changed=False, debug_out='Pre upgrade checks will be executed.',
                        id='Pre upgrade checks')
     request_data = json.dumps(upgrade_prechecks_params)
     try:
-      (rc, resp) = request(manager_url + '/upgrade?action=execute_pre_upgrade_checks', 
-                           data='', headers=headers, method='POST', 
-                           url_username=mgr_username, url_password=mgr_password, 
+      (rc, resp) = request(manager_url + '/upgrade?action=execute_pre_upgrade_checks',
+                           data='', headers=headers, method='POST',
+                           url_username=mgr_username, url_password=mgr_password,
                            validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
       module.fail_json(msg="Failed to execute pre upgrade checks. Error[%s]." % to_native(err))
@@ -162,7 +162,7 @@ def main():
     changed = False
     try:
       (rc, resp) = request(manager_url+ '/upgrade/pre-upgrade-checks/failures',
-                           url_username=mgr_username, url_password=mgr_password, 
+                           url_username=mgr_username, url_password=mgr_password,
                            validate_certs=validate_certs)
     except Exception as err:
       module.fail_json(msg='Pre upgrade checks were executed successfully but error'
@@ -183,9 +183,9 @@ def main():
   elif state == 'absent':
     # Aborts pre upgrade checks
     try:
-       (rc, resp) = request(manager_url + '/upgrade?action=abort_pre_upgrade_checks', 
+       (rc, resp) = request(manager_url + '/upgrade?action=abort_pre_upgrade_checks',
                             data='', headers=headers, method='POST',
-                            url_username=mgr_username, url_password=mgr_password, 
+                            url_username=mgr_username, url_password=mgr_password,
                             validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
       module.fail_json(msg="Failed to abort running pre upgrade checks. Error[%s]." % to_native(err))

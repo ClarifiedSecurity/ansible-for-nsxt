@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -86,23 +86,23 @@ def get_mgr_ip_upgrade_enabled(module, mgr_url, mgr_username, mgr_password,
                                headers, validate_certs):
     try:
         (rc, resp) = request(mgr_url + '/node/services/install-upgrade',
-               headers=headers, url_username=mgr_username, url_password=mgr_password, 
+               headers=headers, url_username=mgr_username, url_password=mgr_password,
                              validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
         module.fail_json(changed=True, msg='Error getting ip address where '
                         'upgrade is enabled. Error: {}'.format(err))
     return resp['service_properties']['enabled_on'];
 
-def wait_till_upload_done(module, bundle_id, mgr_url, mgr_username, mgr_password, 
+def wait_till_upload_done(module, bundle_id, mgr_url, mgr_username, mgr_password,
                           headers, validate_certs):
     try:
        while True:
          (rc, resp) = request(mgr_url + '/upgrade/bundles/%s/upload-status'% bundle_id,
-                             headers=headers, url_username=mgr_username, 
-                             url_password=mgr_password, validate_certs=validate_certs, 
+                             headers=headers, url_username=mgr_username,
+                             url_password=mgr_password, validate_certs=validate_certs,
                              ignore_errors=True)
          if resp['status'] == 'FAILED':
-             module.fail_json(msg='Failed to upload upgrade bunlde. Error: %s' % 
+             module.fail_json(msg='Failed to upload upgrade bunlde. Error: %s' %
                               resp['detailed_status'])
          if resp['status'] == 'SUCCESS':
              time.sleep(5)
@@ -110,7 +110,7 @@ def wait_till_upload_done(module, bundle_id, mgr_url, mgr_username, mgr_password
     except Exception as err:
           module.fail_json(changed=True, msg="Error: %s" % err)
 
-def upload_mub(module, mgr_url, mgr_username, mgr_password, validate_certs, request_data, 
+def upload_mub(module, mgr_url, mgr_username, mgr_password, validate_certs, request_data,
                headers, ip_address, timeout=10800):
     endpoint = '/upgrade/bundles'
     mub_type = 'url'
@@ -141,7 +141,7 @@ def upload_mub(module, mgr_url, mgr_username, mgr_password, validate_certs, requ
              rf = RequestField('file', src_file.read(), os.path.basename(src_file.name))
              rf.make_multipart()
              body, content_type = encode_multipart_formdata([rf])
-  
+
         headers['Content-Type'] = content_type
         headers['Content-length'] = len(body)
 
@@ -149,22 +149,22 @@ def upload_mub(module, mgr_url, mgr_username, mgr_password, validate_certs, requ
       body = request_data
 
     try:
-        (rc, resp) = request(mgr_url + endpoint, data=body, headers=headers, 
-                             method='POST', url_username=mgr_username, 
-                             url_password=mgr_password, validate_certs=validate_certs, 
+        (rc, resp) = request(mgr_url + endpoint, data=body, headers=headers,
+                             method='POST', url_username=mgr_username,
+                             url_password=mgr_password, validate_certs=validate_certs,
                              ignore_errors=True)
         if rc == 200:
             bundle_id = 'latest'#resp['bundle_id']
             headers = dict(Accept="application/json")
             headers['Content-Type'] = 'application/json'
             try:
-                wait_for_operation_to_execute(mgr_url, 
-                    '/upgrade/bundles/%s/upload-status'% bundle_id, 
-                    mgr_username, mgr_password, validate_certs, 
+                wait_for_operation_to_execute(mgr_url,
+                    '/upgrade/bundles/%s/upload-status'% bundle_id,
+                    mgr_username, mgr_password, validate_certs,
                     ['status'], ['SUCCESS'], ['FAILED'])
             except Exception as err:
                 module.fail_json(msg='Error while uploading upgrade bundle. Error [%s]' % to_native(err))
-            module.exit_json(changed=True, ip_address=ip_address, response=resp, 
+            module.exit_json(changed=True, ip_address=ip_address, response=resp,
             message='The upgrade bundle %s got uploaded successfully.' % module.params[mub_type])
         else:
             module.fail_json(msg='Failed to run upload mub. response code: {}'
@@ -178,7 +178,7 @@ def main():
     argument_spec.update(url=dict(type='str'),
                          file=dict(type='str'),
                          timeout=dict(type='int', required=False))
-    module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True, 
+    module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True,
                            required_one_of=[('url', 'file')])
     upgrade_params = get_upload_mub_params(module.params.copy())
 
@@ -195,10 +195,10 @@ def main():
                                                  headers, validate_certs)
     update_node_url = 'https://{}/api/v1'.format(node_ip_address)
     if timeout is not None:
-        upload_mub(module, update_node_url, mgr_username, mgr_password, validate_certs, request_data, 
+        upload_mub(module, update_node_url, mgr_username, mgr_password, validate_certs, request_data,
                headers, node_ip_address, timeout)
     else:
-        upload_mub(module, update_node_url, mgr_username, mgr_password, validate_certs, request_data, 
+        upload_mub(module, update_node_url, mgr_username, mgr_password, validate_certs, request_data,
                headers, node_ip_address)
 
 if __name__ == '__main__':

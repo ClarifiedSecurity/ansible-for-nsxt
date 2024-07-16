@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -58,24 +58,24 @@ options:
         required: true
         type: str
     extra_configs:
-        description: 'This property could be used for vendor specific configuration in key 
+        description: 'This property could be used for vendor specific configuration in key
                       value string pairs, the setting in extra_configs will be automatically
                       inheritted by logical ports in the logical switch.'
         required: false
         type: array of ExtraConfig
     hybrid:
         description: 'If this flag is set to true, then all the logical switch ports attached
-                      to this logical switch will behave in a hybrid fashion. The hybrid 
-                      logical switch port indicates to NSX that the VM intends to operate in 
+                      to this logical switch will behave in a hybrid fashion. The hybrid
+                      logical switch port indicates to NSX that the VM intends to operate in
                       underlay mode, but retains the ability to forward egress traffic to the
                       NSX overlay network.
-                  
-                      This flag can be enabled only for the logical switches in the overlay 
-                      type transport zone which has host switch mode as STANDARD and also has 
+
+                      This flag can be enabled only for the logical switches in the overlay
+                      type transport zone which has host switch mode as STANDARD and also has
                       either CrossCloud or CloudScope tag scopes.
-                  
-                      Only the NSX public cloud gateway (PCG) uses this flag, other host agents 
-                      like ESX, KVM and Edge will ignore it. This property cannot be modified 
+
+                      Only the NSX public cloud gateway (PCG) uses this flag, other host agents
+                      like ESX, KVM and Edge will ignore it. This property cannot be modified
                       once the logical switch is created.'
         required: false
         type: boolean
@@ -115,8 +115,8 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                    'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                    'present' is used to create or update resource.
                     'absent' is used to delete resource."
         required: true
     switch_type:
@@ -124,7 +124,7 @@ options:
                       by manager internally and any user provided values will not be honored.
                       DEFAULT type LogicalSwitches are created for basic L2 connectivity by API
                       users.
-                      SERVICE_PLANE type LogicalSwitches are system created service plane 
+                      SERVICE_PLANE type LogicalSwitches are system created service plane
                       LogicalSwitches
                       Service Insertion service.'
         required: false
@@ -139,8 +139,8 @@ options:
         type: str
     uplink_teaming_policy_name:
         description: This name has to be one of the switching uplink teaming policy names
-                     listed inside the logical switch's TransportZone. If this field is not 
-                     specified, the logical switch will not have a teaming policy associated 
+                     listed inside the logical switch's TransportZone. If this field is not
+                     specified, the logical switch will not have a teaming policy associated
                      with it and the host switch's default teaming policy will be used.
         required: false
         type: str
@@ -151,7 +151,7 @@ options:
         type: int
     vlan_trunk_spec:
         description: 'This property is used for VLAN trunk specification of logical switch.
-                      It''s mutually exclusive with ''vlan''. Also it could be set to do guest 
+                      It''s mutually exclusive with ''vlan''. Also it could be set to do guest
                       VLAN tagging in overlay network.'
         required: false
         type: dict
@@ -165,7 +165,7 @@ options:
                       inside the default pool and not used by any other LogicalSwitch.'
         required: false
         type: int
-    
+
 '''
 
 EXAMPLES = '''

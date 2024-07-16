@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2021 VMware, Inc.
@@ -24,7 +24,7 @@ DOCUMENTATION = '''
 ---
 module: nsxt_global_manager_active
 short_description: 'Make the global manager as Active'
-description: "Make the global manager as Active. This module has to be called using the details of global manager 
+description: "Make the global manager as Active. This module has to be called using the details of global manager
               which is to be made active"
 version_added: '3.2'
 author: 'Kaushik Lele'
@@ -144,7 +144,7 @@ def main():
 
         request_data_dict = existing_global_manager
         request_data_dict["mode"] = "ACTIVE"
-        request_data_dict.pop("connection_info", None) 
+        request_data_dict.pop("connection_info", None)
         request_data = json.dumps(request_data_dict)
 
         if module.check_mode:

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -73,7 +73,7 @@ def main():
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
 
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
@@ -94,8 +94,8 @@ def main():
   time.sleep(5)
 
   try:
-    wait_for_operation_to_execute(manager_url, '/upgrade/uc-upgrade-status', 
-                                  mgr_username, mgr_password, validate_certs, 
+    wait_for_operation_to_execute(manager_url, '/upgrade/uc-upgrade-status',
+                                  mgr_username, mgr_password, validate_certs,
                                   ['state'], ['SUCCESS'], ['FAILED'])
   except Exception as err:
     module.fail_json(msg='Error while upgrading UC. Error [%s]' % to_native(err))

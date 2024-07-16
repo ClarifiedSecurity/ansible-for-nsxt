@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -26,7 +26,7 @@ module: nsxt_logical_router_ports_facts
 short_description: List Logical Router Ports
 description: Returns information about all logical router ports. Information includes the
               resource_type (LogicalRouterUpLinkPort, LogicalRouterDownLinkPort,
-              LogicalRouterLinkPort, LogicalRouterLoopbackPort, 
+              LogicalRouterLinkPort, LogicalRouterLoopbackPort,
               LogicalRouterCentralizedServicePort);
               logical_router_id (the router to which each logical router port is assigned);
               and any service_bindings (such as DHCP relay service).

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -49,7 +49,7 @@ options:
         required: true
         type: str
     parallel:
-        description: 'Upgrade Method to specify whether the upgrade is 
+        description: 'Upgrade Method to specify whether the upgrade is
                       to be performed serially or in parallel'
         required: true
         type: boolean
@@ -59,7 +59,7 @@ options:
         required: true
         type: boolean
     pause_on_error:
-        description: 'Flag to indicate whether to pause the upgrade plan 
+        description: 'Flag to indicate whether to pause the upgrade plan
                       execution when an error occurs'
         required: true
         type: boolean
@@ -115,7 +115,7 @@ def main():
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
 
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
@@ -124,14 +124,14 @@ def main():
     # update the default upgrade plan
     if module.check_mode:
       module.exit_json(changed=False, debug_out='Upgrade Plan will be modified.'
-        ' parallel: %s, pause_after_each_group: %s, pause_on_error: %s' % 
-        (module.params['parallel'], module.params['pause_after_each_group'], 
+        ' parallel: %s, pause_after_each_group: %s, pause_on_error: %s' %
+        (module.params['parallel'], module.params['pause_after_each_group'],
         module.params['pause_on_error']), id=module.params['component_type'])
     request_data = json.dumps(upgrade_plan_params)
     try:
-      (rc, resp) = request(manager_url+ '/upgrade/plan/%s/settings' % component_type.upper(), 
-                           data=request_data, headers=headers, method='PUT', 
-                           url_username=mgr_username, url_password=mgr_password, 
+      (rc, resp) = request(manager_url+ '/upgrade/plan/%s/settings' % component_type.upper(),
+                           data=request_data, headers=headers, method='PUT',
+                           url_username=mgr_username, url_password=mgr_password,
                            validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
       module.fail_json(msg="Failed to update upgrade plan. Error[%s]." % to_native(err))
@@ -143,9 +143,9 @@ def main():
     # reset to default upgrade plan
     try:
        (rc, resp) = request(manager_url+ '/upgrade/plan?action=reset&'
-                            'component_type=%s' % component_type.upper(), 
+                            'component_type=%s' % component_type.upper(),
                             data='', headers=headers, method='POST',
-                            url_username=mgr_username, url_password=mgr_password, 
+                            url_username=mgr_username, url_password=mgr_password,
                             validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
       module.fail_json(msg="Failed while reseting the upgrade plan. Error[%s]." % to_native(err))

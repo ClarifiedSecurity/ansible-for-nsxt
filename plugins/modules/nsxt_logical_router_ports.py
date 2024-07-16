@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -80,8 +80,8 @@ options:
         service:
             alg:
                 description: "The Application Layer Gateway (ALG) protocol.
-                              Please note, protocol NBNS_BROADCAST and NBDG_BROADCAST are  
-                              deprecated.Please use UDP protocol and create L4 Port Set type 
+                              Please note, protocol NBNS_BROADCAST and NBDG_BROADCAST are
+                              deprecated.Please use UDP protocol and create L4 Port Set type
                               of service instead."
                 required: true
                 type: str
@@ -117,8 +117,8 @@ options:
             required: false
             resource_type:
                 description: "LogicalRouterUpLinkPort is allowed only on TIER0 logical router.
-                              It is the north facing port of the logical router. 
-                              LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical 
+                              It is the north facing port of the logical router.
+                              LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical
                               router.
                               This is the port where the LogicalRouterLinkPortOnTIER1
                               of TIER1 logical router connects to. LogicalRouterLinkPortOnTIER1
@@ -127,16 +127,16 @@ options:
                               router for upwards connectivity via TIER0 logical router.
 
                               Connect this port to the LogicalRouterLinkPortOnTIER0 of the TIER0
-                              logical router. LogicalRouterDownLinkPort is for the connected 
-                              subnets on the logical router. LogicalRouterLoopbackPort is a 
+                              logical router. LogicalRouterDownLinkPort is for the connected
+                              subnets on the logical router. LogicalRouterLoopbackPort is a
                               loopback port for logical router component which is placed on c
                               hosen edge cluster member. LogicalRouterIPTunnelPort is a IPSec VPN
-                              tunnel port created on logical router when route based VPN session 
+                              tunnel port created on logical router when route based VPN session
                               configured.
-                              LogicalRouterCentralizedServicePort is allowed only on Active/Standby 
-                              TIER0 and TIER1 logical router. Port can be connected to VLAN or 
+                              LogicalRouterCentralizedServicePort is allowed only on Active/Standby
+                              TIER0 and TIER1 logical router. Port can be connected to VLAN or
                               overlay logical switch. Unlike downlink port it does not participate
-                              in distributed routing and hosted on all edge cluster members 
+                              in distributed routing and hosted on all edge cluster members
                               associated with logical router.
                               Stateful services can be applied on this port."
                 required: true
@@ -177,9 +177,9 @@ options:
         service:
             alg:
                 description: "The Application Layer Gateway (ALG) protocol.
-                              Please note, protocol NBNS_BROADCAST and 
+                              Please note, protocol NBNS_BROADCAST and
                               NBDG_BROADCAST are  deprecated.
-                              Please use UDP protocol and create L4 Port 
+                              Please use UDP protocol and create L4 Port
                               Set type of service instead."
                 required: true
                 type: str
@@ -215,8 +215,8 @@ options:
             required: false
             resource_type:
                 description: "LogicalRouterUpLinkPort is allowed only on TIER0 logical router.
-                              It is the north facing port of the logical router. 
-                              LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical 
+                              It is the north facing port of the logical router.
+                              LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical
                               router.
                               This is the port where the LogicalRouterLinkPortOnTIER1
                               of TIER1 logical router connects to. LogicalRouterLinkPortOnTIER1
@@ -225,16 +225,16 @@ options:
                               router for upwards connectivity via TIER0 logical router.
 
                               Connect this port to the LogicalRouterLinkPortOnTIER0 of the TIER0
-                              logical router. LogicalRouterDownLinkPort is for the connected 
-                              subnets on the logical router. LogicalRouterLoopbackPort is a 
+                              logical router. LogicalRouterDownLinkPort is for the connected
+                              subnets on the logical router. LogicalRouterLoopbackPort is a
                               loopback port for logical router component which is placed on c
                               hosen edge cluster member. LogicalRouterIPTunnelPort is a IPSec VPN
-                              tunnel port created on logical router when route based VPN session 
+                              tunnel port created on logical router when route based VPN session
                               configured.
-                              LogicalRouterCentralizedServicePort is allowed only on Active/Standby 
-                              TIER0 and TIER1 logical router. Port can be connected to VLAN or 
+                              LogicalRouterCentralizedServicePort is allowed only on Active/Standby
+                              TIER0 and TIER1 logical router. Port can be connected to VLAN or
                               overlay logical switch. Unlike downlink port it does not participate
-                              in distributed routing and hosted on all edge cluster members 
+                              in distributed routing and hosted on all edge cluster members
                               associated with logical router.
                               Stateful services can be applied on this port."
                 required: true
@@ -253,7 +253,7 @@ options:
             required: false
             type: str
         target_type:
-            description: Type of the Policy object corresponding to the source type 
+            description: Type of the Policy object corresponding to the source type
                          (e.g. Segment).
             required: false
             type: str
@@ -275,8 +275,8 @@ options:
         type: int
     resource_type:
         description: "LogicalRouterUpLinkPort is allowed only on TIER0 logical router.
-                    It is the north facing port of the logical router. 
-                    LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical 
+                    It is the north facing port of the logical router.
+                    LogicalRouterLinkPortOnTIER0 is allowed only on TIER0 logical
                     router.
                     This is the port where the LogicalRouterLinkPortOnTIER1
                     of TIER1 logical router connects to. LogicalRouterLinkPortOnTIER1
@@ -285,16 +285,16 @@ options:
                     router for upwards connectivity via TIER0 logical router.
 
                     Connect this port to the LogicalRouterLinkPortOnTIER0 of the TIER0
-                    logical router. LogicalRouterDownLinkPort is for the connected 
-                    subnets on the logical router. LogicalRouterLoopbackPort is a 
+                    logical router. LogicalRouterDownLinkPort is for the connected
+                    subnets on the logical router. LogicalRouterLoopbackPort is a
                     loopback port for logical router component which is placed on c
                     hosen edge cluster member. LogicalRouterIPTunnelPort is a IPSec VPN
-                    tunnel port created on logical router when route based VPN session 
+                    tunnel port created on logical router when route based VPN session
                     configured.
-                    LogicalRouterCentralizedServicePort is allowed only on Active/Standby 
-                    TIER0 and TIER1 logical router. Port can be connected to VLAN or 
+                    LogicalRouterCentralizedServicePort is allowed only on Active/Standby
+                    TIER0 and TIER1 logical router. Port can be connected to VLAN or
                     overlay logical switch. Unlike downlink port it does not participate
-                    in distributed routing and hosted on all edge cluster members 
+                    in distributed routing and hosted on all edge cluster members
                     associated with logical router.
                     Stateful services can be applied on this port."
         required: true
@@ -307,8 +307,8 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                      'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                      'present' is used to create or update resource.
                       'absent' is used to delete resource."
         required: true
     subnets:
@@ -360,7 +360,7 @@ options:
         description: Opaque identifiers meaningful to the API user
         required: False
         type: list
-    
+
 '''
 
 EXAMPLES = '''

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -46,7 +46,7 @@ options:
             - contents
         description: "required_info can be either 'acceptance' or 'contents'.
                       'acceptance' returns the acceptance status of end user license agreement .
-                      'contents' Return the content of end user license agreement in the specified format. 
+                      'contents' Return the content of end user license agreement in the specified format.
                        By default, it's pure string without line break. "
         required: true
 '''
@@ -71,7 +71,7 @@ from ansible.module_utils._text import to_native
 
 def main():
   argument_spec = vmware_argument_spec()
-  argument_spec.update(required_info=dict(required=True, type='str', 
+  argument_spec.update(required_info=dict(required=True, type='str',
                        choices=['acceptance', 'contents']))
 
   module = AnsibleModule(argument_spec=argument_spec, supports_check_mode=True)

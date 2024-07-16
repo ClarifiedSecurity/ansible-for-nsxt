@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -103,7 +103,7 @@ options:
                       'absent' is used to delete resource."
         required: true
 
-    
+
 '''
 
 EXAMPLES = '''

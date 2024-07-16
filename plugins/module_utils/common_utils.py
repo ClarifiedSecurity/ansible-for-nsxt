@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # Copyright 2019 VMware, Inc.
 # SPDX-License-Identifier: BSD-2-Clause OR GPL-3.0-only
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
 # BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 # IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
@@ -51,7 +51,7 @@ def traverse_and_retrieve_value(object , attribute_list):
                             'while traversing.' % attribute)
     return object
 
-def get_attribute_from_endpoint(module, manager_url, endpoint, mgr_username, 
+def get_attribute_from_endpoint(module, manager_url, endpoint, mgr_username,
                                 mgr_password, validate_certs, attribute_name,
                                 fail_on_error=True):
     '''
@@ -63,7 +63,7 @@ def get_attribute_from_endpoint(module, manager_url, endpoint, mgr_username,
     '''
     try:
         (rc, resp) = request(manager_url+ endpoint, headers=dict(Accept='application/json'),
-                      url_username=mgr_username, url_password=mgr_password, 
+                      url_username=mgr_username, url_password=mgr_password,
                       validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
         if fail_on_error:
@@ -75,9 +75,9 @@ def get_attribute_from_endpoint(module, manager_url, endpoint, mgr_username,
         return resp[attribute_name]
     return None
 
-def get_id_from_display_name_results(module, manager_url, endpoint, mgr_username, 
-                                     mgr_password, validate_certs, 
-                                     search_attribute_list, return_attribute_list, 
+def get_id_from_display_name_results(module, manager_url, endpoint, mgr_username,
+                                     mgr_password, validate_certs,
+                                     search_attribute_list, return_attribute_list,
                                      display_name, fail_module=True):
     '''
     params:
@@ -89,7 +89,7 @@ def get_id_from_display_name_results(module, manager_url, endpoint, mgr_username
     '''
     try:
         (rc, resp) = request(manager_url+ endpoint, headers=dict(Accept='application/json'),
-                      url_username=mgr_username, url_password=mgr_password, 
+                      url_username=mgr_username, url_password=mgr_password,
                       validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
         module.fail_json(msg='Error while converting the passed name to'
@@ -105,7 +105,7 @@ def get_id_from_display_name_results(module, manager_url, endpoint, mgr_username
     else:
         return None
 
-def wait_for_operation_to_execute(manager_url, endpoint, mgr_username, 
+def wait_for_operation_to_execute(manager_url, endpoint, mgr_username,
                                   mgr_password, validate_certs, attribute_list,
                                   desired_attribute_values, undesired_attribute_values,
                                   time_out=10800):
@@ -114,7 +114,7 @@ def wait_for_operation_to_execute(manager_url, endpoint, mgr_username,
     - endpoint: API endpoint.
     - attribute_list: The attribute whose value should become the desired attribute value
     - desired_attribute_value: The desired attribute value
-    
+
     Function will wait till the attribute value derived from going deep to attribute list
     becomes equal to desired_attribute_value.
     '''
@@ -122,7 +122,7 @@ def wait_for_operation_to_execute(manager_url, endpoint, mgr_username,
     while True:
         try:
             (rc, resp) = request(manager_url + endpoint, headers=dict(Accept='application/json'),
-                                 url_username=mgr_username, url_password=mgr_password, 
+                                 url_username=mgr_username, url_password=mgr_password,
                                  validate_certs=validate_certs, ignore_errors=True)
         except Exception as err:
             pass
@@ -159,11 +159,11 @@ def get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, mgr_passwo
     params:
     - mgr_hostname: Any one of the manager node in manager cluster
 
-    Returns the upgrade orchestrator node  
+    Returns the upgrade orchestrator node
     '''
     try:
         (rc, resp) = request('https://%s/api/v1/node/services/install-upgrade' % mgr_hostname,
-               headers=headers, url_username=mgr_username, url_password=mgr_password, 
+               headers=headers, url_username=mgr_username, url_password=mgr_password,
                              validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
         module.fail_json(changed=True, msg='Error getting ip address of the upgrade'

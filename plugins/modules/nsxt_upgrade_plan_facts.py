@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -85,7 +85,7 @@ def main():
   changed = False
   try:
     (rc, resp) = request(manager_url+ '/upgrade/plan/%s/settings' % component_type.upper(),
-                         headers=dict(Accept='application/json'), url_username=mgr_username, 
+                         headers=dict(Accept='application/json'), url_username=mgr_username,
                          url_password=mgr_password, validate_certs=validate_certs, ignore_errors=True)
   except Exception as err:
     module.fail_json(msg='Error while retrieving bundle information. Error [%s]' % (to_native(err)))

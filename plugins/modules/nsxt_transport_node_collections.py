@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -68,15 +68,15 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                     'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                     'present' is used to create or update resource.
                      'absent' is used to delete resource."
         required: true
     transport_node_profile_name:
         description: Transport Node Profile Names
         required: true
         type: str
-    
+
 '''
 
 EXAMPLES = '''

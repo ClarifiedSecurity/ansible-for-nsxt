@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -24,8 +24,8 @@ DOCUMENTATION = '''
 ---
 module: nsxt_virtual_ip
 short_description: 'Sets and clears cluster virtual IP address'
-description: "Sets the cluster virtual IP address. Note, all nodes in the management 
-              cluster must be in the same subnet. If not, a 409 CONFLICT status is 
+description: "Sets the cluster virtual IP address. Note, all nodes in the management
+              cluster must be in the same subnet. If not, a 409 CONFLICT status is
               returned. "
 version_added: '2.7'
 author: 'Rahul Raghuvanshi'
@@ -65,7 +65,7 @@ options:
         description: "State can be either 'present' or 'absent'.
                       'present' is used to create or update resource.
                       'absent' is used to delete resource."
-        required: true   
+        required: true
 '''
 
 EXAMPLES = '''

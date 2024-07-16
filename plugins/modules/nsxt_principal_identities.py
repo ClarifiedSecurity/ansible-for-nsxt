@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -139,7 +139,7 @@ def get_principal_identity_update_params(args=None):
 def update_params_with_pem_encoding(principal_id_params):
     '''
     params: Parameters passed to the certificate
-    result: Updated parameters. Files are replaced with the public and private strings. 
+    result: Updated parameters. Files are replaced with the public and private strings.
     '''
     principal_id_params['certificate_pem'] = get_certificate_string (principal_id_params.pop('certificate_pem_file', None))
     return principal_id_params
@@ -220,7 +220,7 @@ def main():
                        port=dict(type='int', default=443),
                        validate_certs=dict(type='bool', requried=False, default=True),
                        display_name=dict(required=True, type='str'),
-                       name=dict(required=True, type='str'), 
+                       name=dict(required=True, type='str'),
                        node_id=dict(required=True, type='str'),
                        certificate_name=dict(required=False, type='str'),
                        certificate_pem_file=dict(required=True, type='str', no_log=True),
@@ -268,7 +268,7 @@ def main():
         module.exit_json(changed=True, result=resp, message="Principal identity updated.")
     # add the principal identity
     if principal_id_with_display_name:
-      module.exit_json(changed=False, msg="Principal id with display name \'%s\' already exists." % display_name) 
+      module.exit_json(changed=False, msg="Principal id with display name \'%s\' already exists." % display_name)
     request_data = json.dumps(principal_id_params)
     try:
         (rc, resp) = request(manager_url+ '/trust-management/principal-identities/with-certificate', data=request_data, headers=headers, method='POST',

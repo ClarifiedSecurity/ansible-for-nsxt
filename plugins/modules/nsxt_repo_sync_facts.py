@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -79,7 +79,7 @@ def main():
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
 
-  manager_node_id = get_id_from_display_name_results(module, manager_url, 
+  manager_node_id = get_id_from_display_name_results(module, manager_url,
     '/cluster/nodes/deployments', mgr_username, mgr_password, validate_certs,
     ['deployment_config','hostname'], ['vm_id'], manager_node_name)
 

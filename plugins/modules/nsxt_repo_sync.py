@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -24,9 +24,9 @@ DOCUMENTATION = '''
 ---
 module: nsxt_repo_sync
 short_description: 'Synchronizes the repository data between nsx managers'
-description: "Attempts to synchronize the repository partition on nsx 
-              manager. Repository partition contains packages required for 
-              the install and upgrade of nsx components.Normally 
+description: "Attempts to synchronize the repository partition on nsx
+              manager. Repository partition contains packages required for
+              the install and upgrade of nsx components.Normally
               there is no need to call this API explicitely by the user."
 version_added: '2.7'
 author: 'Kommireddy Akhilesh'
@@ -76,7 +76,7 @@ def main():
 
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
- 
+
   # Synchronize the repository data between nsx managers
 
   if module.check_mode:

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2021 VMware, Inc.
@@ -51,7 +51,7 @@ options:
     host_name:
         description: 'Fully Qualified Domain Name(FQDN) of vIDM'
         required: false
-        type: str                
+        type: str
     lb_enable:
         description: 'Load Balancer enable flag'
         required: false
@@ -60,12 +60,12 @@ options:
         description: "Host name of the node redirected to
             host name to use when creating the redirect URL for clients to follow after authenticating to vIDM"
         required: true
-        type: bool    
+        type: bool
     thumbprint:
         description: "vIDM certificate thumbprint
             Hexadecimal SHA256 hash of the vIDM server's X.509 certificate"
         required: true
-        type: str            
+        type: str
     state:
         choices:
             - present
@@ -75,7 +75,7 @@ options:
                       'absent' is used to delete resource."
         required: true
 
-    
+
 '''
 
 EXAMPLES = '''

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2021 VMware, Inc.
@@ -78,14 +78,14 @@ options:
         required: true
         type: str
     maximum_rtt:
-        description: "Maximum acceptable packet round trip time (RTT). 
+        description: "Maximum acceptable packet round trip time (RTT).
                 If provided and fail_if_rtt_exceeded is true, onboarding of the site will
                 fail if measured RTT is greater than this value.
                 Minimum: 0
                 Maximum: 1000
                 Default: 250"
         required: false
-        type: int                           
+        type: int
     mode:
         choices:
             - ACTIVE
@@ -102,7 +102,7 @@ options:
                       'absent' is used to delete resource."
         required: true
 
-    
+
 '''
 
 EXAMPLES = '''

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -108,8 +108,8 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                    'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                    'present' is used to create or update resource.
                     'absent' is used to delete resource."
         required: true
     teaming:
@@ -132,7 +132,7 @@ options:
         description: VLAN used for tagging Overlay traffic of associated HostSwitch
         required: false
         type: int
-    
+
 '''
 
 EXAMPLES = '''
@@ -207,7 +207,7 @@ def cmp_dict(dict1, dict2): # dict1 contain dict2
             continue
         if type(v2) != list and dict1[k2] != dict2[k2]:
             return False
-            
+
         for obj2 in v2:
             for obj1 in dict1[k2]:
                 if all(item in obj1.items() for item in obj2.items()):
@@ -260,7 +260,7 @@ def check_for_update(module, manager_url, mgr_username, mgr_password, validate_c
        if not both_teamings_same:
           return True
     return False
-  
+
 
 def main():
   argument_spec = vmware_argument_spec()

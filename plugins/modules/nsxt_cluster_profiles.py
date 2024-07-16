@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2020 VMware, Inc.
@@ -48,7 +48,7 @@ options:
         description: Description of the resource
         required: false
         type: str
-    
+
     state:
         choices:
             - present
@@ -58,7 +58,7 @@ options:
                       'absent' is used to delete resource."
         required: true
 
-    
+
 '''
 
 EXAMPLES = '''

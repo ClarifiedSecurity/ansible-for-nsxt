@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -26,8 +26,8 @@ module: nsxt_transport_zones
 short_description: Create a Transport Zone
 description: "Creates a new transport zone. The required parameters are host_switch_name
 and transport_type (OVERLAY or VLAN). The optional parameters are
-description and display_name. This api is now deprecated. Please use new api - 
-PUT /infra/sites/<site-id>/enforcement-points/<enforcementpoint- 
+description and display_name. This api is now deprecated. Please use new api -
+PUT /infra/sites/<site-id>/enforcement-points/<enforcementpoint-
 id>/transport-zones/<zone-id>"
 
 version_added: "2.7"
@@ -54,7 +54,7 @@ options:
         type: str
     is_default:
         description: Only one transport zone can be the default one for a given transport
-                     zone type. APIs that need transport zone can choose to use the default 
+                     zone type. APIs that need transport zone can choose to use the default
                      transport zone if a transport zone is not given by the user.
         required: false
         type: boolean
@@ -69,8 +69,8 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                      'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                      'present' is used to create or update resource.
                       'absent' is used to delete resource."
         required: true
     tz_type:
@@ -82,17 +82,17 @@ options:
         required: false
         type: Array of Tag
     transport_zone_profile_ids:
-        description: Identifiers of the transport zone profiles associated with this 
+        description: Identifiers of the transport zone profiles associated with this
                      TransportZone.
         required: false
         type: array of TransportZoneProfileTypeIdEntry
     uplink_teaming_policy_names:
         description: The names of switching uplink teaming policies that all transport nodes
-                     in this transport zone must support. An exception will be thrown if a 
+                     in this transport zone must support. An exception will be thrown if a
                      transport node within the transport zone does not support a named teaming
-                     policy. The user will need to first ensure all trasnport nodes support the 
-                     desired named teaming policy before assigning it to the transport zone. 
-                     If the field is not specified, the host switch's default teaming policy will 
+                     policy. The user will need to first ensure all trasnport nodes support the
+                     desired named teaming policy before assigning it to the transport zone.
+                     If the field is not specified, the host switch's default teaming policy will
                      be used.
         required: false
         type: list

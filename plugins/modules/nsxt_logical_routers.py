@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -50,10 +50,10 @@ options:
             type: list
         ha_vip_configs:
             description: This configuration can be defined only for Active-Standby LogicalRouter
-                          to provide redundancy. For multiple uplink ports, multiple HaVipConfigs 
-                          must be defined and each config will pair exactly two uplink ports. 
-                          The VIP will move and will always be owned by the Active node. 
-                          Note - when HaVipConfig[s] are defined, configuring dynamic-routing is 
+                          to provide redundancy. For multiple uplink ports, multiple HaVipConfigs
+                          must be defined and each config will pair exactly two uplink ports.
+                          The VIP will move and will always be owned by the Active node.
+                          Note - when HaVipConfig[s] are defined, configuring dynamic-routing is
                           disallowed.
             required: false
             type: array of HaVipConfig
@@ -78,9 +78,9 @@ options:
                 required: true
                 type: str
             allocation_size:
-                description: "To address varied customer performance and scalability 
-                              requirements, different sizes for load balancer service are 
-                              supported: SMALL, MEDIUM and LARGE, each with its own set of 
+                description: "To address varied customer performance and scalability
+                              requirements, different sizes for load balancer service are
+                              supported: SMALL, MEDIUM and LARGE, each with its own set of
                               resource and performance. Specify size of load balancer service
                               which you will bind to TIER1 router."
                 required: true
@@ -130,9 +130,9 @@ options:
                       a failure. If set to PREEMPTIVE, the preferred node will take over,
                       even if it causes another failure. If set to NON_PREEMPTIVE, then the
                       instance that restarted will remain secondary.
-                      This property must not be populated unless the high_availability_mode 
+                      This property must not be populated unless the high_availability_mode
                       property is set to ACTIVE_STANDBY.
-                      If high_availability_mode property is set to ACTIVE_STANDBY and this 
+                      If high_availability_mode property is set to ACTIVE_STANDBY and this
                       property is not specified then default will be NON_PREEMPTIVE.'
         required: false
         type: str
@@ -152,8 +152,8 @@ options:
                      of local and peer subnet.
                      A Route Based VPN is more flexible, more powerful
                      and recommended over policy based VPN. IP Tunnel port is created and all
-                     traffic routed via tunnel port is protected. Routes can be configured 
-                     statically or can be learned through BGP. A route based VPN is must for 
+                     traffic routed via tunnel port is protected. Routes can be configured
+                     statically or can be learned through BGP. A route based VPN is must for
                      establishing redundant VPN session to remote site."
         required: false
         type: str
@@ -181,11 +181,11 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                      'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                      'present' is used to create or update resource.
                       'absent' is used to delete resource."
         required: true
-    
+
 '''
 
 EXAMPLES = '''
@@ -258,7 +258,7 @@ def update_params_with_id (module, manager_url, mgr_username, mgr_password, vali
         if logical_router_params['ipv6_profiles'].__contains__('dad_profile_name'):
             dad_profile_name = logical_router_params['ipv6_profiles'].pop('dad_profile_name')
             logical_router_params['ipv6_profiles']['dad_profile_id'] = get_id_from_display_name (module, manager_url,
-                                                                                                   mgr_username, mgr_password, 
+                                                                                                   mgr_username, mgr_password,
                                                                                                    validate_certs,
                                                                                                    "/ipv6/dad-profiles", dad_profile_name)
         if logical_router_params['ipv6_profiles'].__contains__('ndra_profile_name'):

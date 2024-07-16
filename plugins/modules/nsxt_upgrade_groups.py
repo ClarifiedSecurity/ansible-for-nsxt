@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -45,7 +45,7 @@ options:
         required: true
         type: str
     parallel:
-        description: 'Upgrade Method to specify whether the upgrade is 
+        description: 'Upgrade Method to specify whether the upgrade is
                       to be performed serially or in parallel'
         required: false
         type: boolean
@@ -105,16 +105,16 @@ from ansible_collections.vmware.ansible_for_nsxt.plugins.module_utils.vmware_nsx
 from ansible_collections.vmware.ansible_for_nsxt.plugins.module_utils.common_utils import clean_and_get_params, get_id_from_display_name_results, get_upgrade_orchestrator_node
 from ansible.module_utils._text import to_native
 
-def update_group_parameters(module, manager_url, 
-                            mgr_username, mgr_password, 
+def update_group_parameters(module, manager_url,
+                            mgr_username, mgr_password,
                             validate_certs,
                             upgrade_group_parameters):
   if upgrade_group_parameters.__contains__('upgrade_units'):
     for upgrade_unit in upgrade_group_parameters['upgrade_units']:
       host_name = upgrade_unit.pop('host_name', None)
-      upgrade_unit_id = get_id_from_display_name_results(module, manager_url, 
+      upgrade_unit_id = get_id_from_display_name_results(module, manager_url,
                                      '/upgrade/upgrade-units', mgr_username,
-                                     mgr_password, validate_certs, 
+                                     mgr_password, validate_certs,
                                      ['display_name'], ['id'],
                                      host_name)
       upgrade_unit['id']= upgrade_unit_id
@@ -145,32 +145,32 @@ def main():
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
 
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
 
 
-  upgrade_group_params = update_group_parameters(module, manager_url, mgr_username, 
-                                                 mgr_password, validate_certs, 
+  upgrade_group_params = update_group_parameters(module, manager_url, mgr_username,
+                                                 mgr_password, validate_certs,
                                                  upgrade_group_params)
 
-  upgrade_unit_group_id = get_id_from_display_name_results(module, manager_url, 
-                                        '/upgrade/upgrade-unit-groups', mgr_username, 
-                                        mgr_password, validate_certs, ['display_name'], 
-                                        ['id'], upgrade_group_params['display_name'], 
+  upgrade_unit_group_id = get_id_from_display_name_results(module, manager_url,
+                                        '/upgrade/upgrade-unit-groups', mgr_username,
+                                        mgr_password, validate_certs, ['display_name'],
+                                        ['id'], upgrade_group_params['display_name'],
                                         False)
   if state == 'present':
-    # create a new upgrade group or modify the existing one 
+    # create a new upgrade group or modify the existing one
     if module.check_mode:
       module.exit_json(changed=False, debug_out='A new upgrade unit will be created with'
                                                 ' name: %s' % module.params['display_name'])
     request_data = json.dumps(upgrade_group_params)
     if upgrade_unit_group_id is None:
       try:
-        (rc, resp) = request(manager_url + '/upgrade/upgrade-unit-groups', 
-                            data=request_data, headers=headers, method='POST', 
-                            url_username=mgr_username, url_password=mgr_password, 
+        (rc, resp) = request(manager_url + '/upgrade/upgrade-unit-groups',
+                            data=request_data, headers=headers, method='POST',
+                            url_username=mgr_username, url_password=mgr_password,
                             validate_certs=validate_certs, ignore_errors=True)
       except Exception as err:
         module.fail_json(msg="Failed to add upgrade group. Error[%s]." % to_native(err))
@@ -181,8 +181,8 @@ def main():
       try:
         (rc, resp) = request(manager_url + '/upgrade/upgrade-unit-'
                             'groups/%s' % upgrade_unit_group_id,
-                            data=request_data, headers=headers, method='PUT', 
-                            url_username=mgr_username, url_password=mgr_password, 
+                            data=request_data, headers=headers, method='PUT',
+                            url_username=mgr_username, url_password=mgr_password,
                             validate_certs=validate_certs, ignore_errors=True)
       except Exception as err:
         module.fail_json(msg="Failed to modify upgrade group. Error[%s]." % to_native(err))
@@ -194,9 +194,9 @@ def main():
     # remove an existing upgrade group
     try:
        (rc, resp) = request(manager_url+ '/upgrade/upgrade-unit-groups'
-                            '/%s' % upgrade_unit_group_id, 
+                            '/%s' % upgrade_unit_group_id,
                             data='', headers=headers, method='DELETE',
-                            url_username=mgr_username, url_password=mgr_password, 
+                            url_username=mgr_username, url_password=mgr_password,
                             validate_certs=validate_certs, ignore_errors=True)
     except Exception as err:
       module.fail_json(msg='Failed while deleting the upgrade'

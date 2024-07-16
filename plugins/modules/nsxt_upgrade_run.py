@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -66,7 +66,7 @@ from ansible.module_utils._text import to_native
 def get_upgrade_status(module, manager_url, mgr_username, mgr_password, validate_certs):
   '''
   Get the current status of upgrade at the start.
-  Doesn't upgrade if any component is in progress 
+  Doesn't upgrade if any component is in progress
   or system is already upgraded.
   '''
   no_of_checks = 0
@@ -74,7 +74,7 @@ def get_upgrade_status(module, manager_url, mgr_username, mgr_password, validate
     endpoint = "/upgrade/upgrade-unit-groups?sync=true"
     call_get_sync(manager_url, endpoint, mgr_username, mgr_password, validate_certs)
     upgrade_status = get_attribute_from_endpoint(module, manager_url, '/upgrade/status-summary',
-                     mgr_username, mgr_password, validate_certs, 'overall_upgrade_status', 
+                     mgr_username, mgr_password, validate_certs, 'overall_upgrade_status',
                      False)
     no_of_checks = no_of_checks + 1
     if upgrade_status == 'IN_PROGRESS' or upgrade_status == 'PAUSING':
@@ -97,11 +97,11 @@ def decide_next_step(module, manager_url, mgr_username, mgr_password,
                      validate_certs, can_continue, is_failed):
   '''
   params:
-  - can_continue: if upgrade can be continued 
+  - can_continue: if upgrade can be continued
   - is_failed: Is there any component Failure
   return:
-  - Decides the next operation to be done based on 
-    can_continue and is_failed values 
+  - Decides the next operation to be done based on
+    can_continue and is_failed values
   '''
   if can_continue and is_failed:
     return
@@ -135,7 +135,7 @@ def check_continuity(module, manager_url, mgr_username, mgr_password, validate_c
   if there is any component fail in the upgrade
   '''
   try:
-    component_status_list = get_attribute_from_endpoint(module, manager_url, 
+    component_status_list = get_attribute_from_endpoint(module, manager_url,
                           '/upgrade/status-summary', mgr_username, mgr_password,
                           validate_certs, 'component_status', False)
   except Exception as err:
@@ -196,13 +196,13 @@ def main():
   mgr_password = module.params['password']
   validate_certs = module.params['validate_certs']
   paused_upgrade = module.params['paused_upgrade']
-  
+
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
-  
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
-  
+
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
 
   if module.check_mode:
@@ -218,17 +218,17 @@ def main():
                                           mgr_password, validate_certs)
       if upgrade_status == 'NOT_STARTED':
         try:
-          (rc, resp) = request(manager_url+ '/upgrade/plan?action=start', 
-                         data='', headers=headers, method='POST', 
-                         url_username=mgr_username, url_password=mgr_password, 
+          (rc, resp) = request(manager_url+ '/upgrade/plan?action=start',
+                         data='', headers=headers, method='POST',
+                         url_username=mgr_username, url_password=mgr_password,
                          validate_certs=validate_certs, ignore_errors=True)
         except Exception as err:
           module.fail_json(msg="Failed while upgrading. Error[%s]." % to_native(err))
       else:
         try:
-          (rc, resp) = request(manager_url+ '/upgrade/plan?action=continue', 
-                         data='', headers=headers, method='POST', 
-                         url_username=mgr_username, url_password=mgr_password, 
+          (rc, resp) = request(manager_url+ '/upgrade/plan?action=continue',
+                         data='', headers=headers, method='POST',
+                         url_username=mgr_username, url_password=mgr_password,
                          validate_certs=validate_certs, ignore_errors=True)
         except Exception as err:
           module.fail_json(msg="Failed while upgrading. Error[%s]." % to_native(err))
@@ -238,7 +238,7 @@ def main():
         try:
           can_continue, is_failed = check_continuity(module, manager_url, mgr_username,
                                                      mgr_password, validate_certs)
-          decide_next_step(module, manager_url, mgr_username, mgr_password, 
+          decide_next_step(module, manager_url, mgr_username, mgr_password,
                            validate_certs, can_continue, is_failed)
           if can_continue and not is_failed:
             break
@@ -251,17 +251,17 @@ def main():
                                           mgr_password, validate_certs)
     if upgrade_status == 'NOT_STARTED':
       try:
-        (rc, resp) = request(manager_url+ '/upgrade/plan?action=start', 
-                     data='', headers=headers, method='POST', 
-                     url_username=mgr_username, url_password=mgr_password, 
+        (rc, resp) = request(manager_url+ '/upgrade/plan?action=start',
+                     data='', headers=headers, method='POST',
+                     url_username=mgr_username, url_password=mgr_password,
                      validate_certs=validate_certs, ignore_errors=True)
       except Exception as err:
         module.fail_json(msg="Failed while upgrading. Error[%s]." % to_native(err))
     else:
       try:
-        (rc, resp) = request(manager_url+ '/upgrade/plan?action=continue', 
-                     data='', headers=headers, method='POST', 
-                     url_username=mgr_username, url_password=mgr_password, 
+        (rc, resp) = request(manager_url+ '/upgrade/plan?action=continue',
+                     data='', headers=headers, method='POST',
+                     url_username=mgr_username, url_password=mgr_password,
                      validate_certs=validate_certs, ignore_errors=True)
       except Exception as err:
         module.fail_json(msg="Failed while upgrading. Error[%s]." % to_native(err))
@@ -270,7 +270,7 @@ def main():
       try:
         can_continue, is_failed = check_continuity(module, manager_url, mgr_username,
                                                    mgr_password, validate_certs)
-        decide_next_step(module, manager_url, mgr_username, mgr_password, 
+        decide_next_step(module, manager_url, mgr_username, mgr_password,
                          validate_certs, can_continue, is_failed)
         if can_continue and not is_failed:
           break

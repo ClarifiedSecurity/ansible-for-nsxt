@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -49,7 +49,7 @@ options:
         type: 'str'
     datacenter:
         description: Datacenter name
-        required: true 
+        required: true
         type: 'str'
     datastore:
         description: Data Store
@@ -75,7 +75,7 @@ options:
         type: 'str'
     hostname:
         description: Name of host
-        required: true 
+        required: true
         type: 'str'
     dns_server:
         description: DNS server address

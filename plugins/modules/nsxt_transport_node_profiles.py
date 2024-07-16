@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -73,8 +73,8 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                      'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                      'present' is used to create or update resource.
                       'absent' is used to delete resource."
         required: true
 '''
@@ -180,7 +180,7 @@ def update_params_with_id (module, manager_url, mgr_username, mgr_password, vali
     for host_switch in transport_node_profile_params['host_switch_spec']['host_switches']:
         if host_switch.__contains__('host_switch_type') and host_switch['host_switch_type'] in FABRIC_VIRTUAL_SWITCH_TYPE:
             if host_switch.__contains__('host_switch_name'):
-                host_switch['host_switch_id'] = get_host_switch_id_from_display_name(module, manager_url, mgr_username, 
+                host_switch['host_switch_id'] = get_host_switch_id_from_display_name(module, manager_url, mgr_username,
                                                                      mgr_password, validate_certs,
                                                                      '/fabric/virtual-switches', host_switch['host_switch_name'])
             else:

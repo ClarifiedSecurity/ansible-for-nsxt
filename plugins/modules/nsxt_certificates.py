@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -24,10 +24,10 @@ DOCUMENTATION = '''
 ---
 module: nsxt_certificates
 short_description: 'Add a New Certificate'
-description: "Adds a new private-public certificate or a chain of certificates (CAs) and, 
-              optionally, a private key that can be applied to one of the user-facing 
-              components (appliance management or edge). The certificate and the key 
-              should be stored in PEM format. If no private key is provided, the 
+description: "Adds a new private-public certificate or a chain of certificates (CAs) and,
+              optionally, a private key that can be applied to one of the user-facing
+              components (appliance management or edge). The certificate and the key
+              should be stored in PEM format. If no private key is provided, the
               certificate is used as a client certificate in the trust store."
 version_added: '2.7'
 author: 'Kommireddy Akhilesh'
@@ -120,7 +120,7 @@ from ansible.module_utils._text import to_native
 def update_params_with_pem_encoding(certificate_params):
     '''
     params: Parameters passed to the certificate
-    result: Updated parameters. Files are replaced with the public and private strings. 
+    result: Updated parameters. Files are replaced with the public and private strings.
     '''
     certificate_params['pem_encoded'] = get_certificate_string (certificate_params.pop('pem_encoded_file', None))
     if certificate_params.get('private_key_file') is not None:
@@ -162,7 +162,7 @@ def main():
                        port=dict(type='int', default=443),
                        validate_certs=dict(type='bool', requried=False, default=True),
                        display_name=dict(required=True, type='str'),
-                       pem_encoded_file=dict(required=False, type='str', no_log=True), 
+                       pem_encoded_file=dict(required=False, type='str', no_log=True),
                        private_key_file=dict(required=False, type='str', no_log=True),
                        passphrase=dict(required=False, type='str', no_log=True),
                        description=dict(required=False, type='str'),
@@ -192,7 +192,7 @@ def main():
   if state == 'present':
     # add the certificate
     if certificate_with_display_name:
-      module.fail_json(msg="Certificate with display name \'%s\' already exists." % display_name)  
+      module.fail_json(msg="Certificate with display name \'%s\' already exists." % display_name)
     try:
       certificate_params = update_params_with_pem_encoding(certificate_params)
       headers = dict(Accept="application/json")
@@ -206,8 +206,8 @@ def main():
     time.sleep(5)
     module.exit_json(changed=True, result=resp, message="certificate created. Response: [%s]" % str(resp))
 
-  elif state == 'absent': 
-    #Delete the certificate   
+  elif state == 'absent':
+    #Delete the certificate
     if not certificate_with_display_name:
       module.fail_json(msg="Certificate with display name \'%s\' doesn't exists." % display_name)
     certificate_id = certificate_with_display_name['id']

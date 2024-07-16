@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -72,7 +72,7 @@ options:
         description: 'Flag to advertise all connected routes'
         required: false
         type: boolean
-    
+
 '''
 
 EXAMPLES = '''
@@ -130,7 +130,7 @@ def get_revision(module, manager_url, mgr_username, mgr_password, validate_certs
     return resp['_revision']
   except Exception as err:
     module.fail_json(msg='Error accessing current advertisement. Error [%s]' % (to_native(err)))
-    
+
 
 def main():
   argument_spec = vmware_argument_spec()
@@ -157,13 +157,13 @@ def main():
   logical_router_id = None
   if logical_router_dict:
     logical_router_id = logical_router_dict['id']
-  
-  advertise_params['_revision'] = get_revision(module, manager_url, mgr_username, mgr_password, 
+
+  advertise_params['_revision'] = get_revision(module, manager_url, mgr_username, mgr_password,
                                               validate_certs, logical_router_id) # update current revision
 
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
-   
+
   # add the pool
   if module.check_mode:
     module.exit_json(changed=True, debug_out=str(json.dumps(advertise_params)), id='12345')

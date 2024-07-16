@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2021 VMware, Inc.
@@ -47,7 +47,7 @@ options:
     id:
         description: 'Unique identifier of this global manager'
         required: true
-        type: str        
+        type: str
 '''
 
 EXAMPLES = '''

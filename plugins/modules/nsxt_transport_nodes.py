@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2018 VMware, Inc.
@@ -146,8 +146,8 @@ options:
                       an array containing different types of HostSwitchSpec objects.'
         host_switches:
             description: This property is deprecated in favor of 'host_switch_spec'. Property
-                          'host_switches' can only be used for NSX managed transport nodes. 
-                          'host_switch_spec' can be used for both NSX managed or manually 
+                          'host_switches' can only be used for NSX managed transport nodes.
+                          'host_switch_spec' can be used for both NSX managed or manually
                           preconfigured host switches.
             required: true
             type: array of PreconfiguredHostSwitch
@@ -166,7 +166,7 @@ options:
         display_name:
             description: Identifier to use when displaying entity in logs or GUI
                          This field is deprecated.
-                         TransportNode field 'display_name' must be used instead. 
+                         TransportNode field 'display_name' must be used instead.
                          For HostNode, this field defaults to ID if not set.
                          For EdgeNode and PublicCloudGatewayNode, this field is ignored if specified in request payload.
             required: false
@@ -186,9 +186,9 @@ options:
                 audit_password:
                     description: "Password for the node audit user. For deployment, this property
                                   is required. After deployment, this property is ignored, and
-                                  the node cli must be used to change the password. The password 
-                                  specified must be at least 12 characters in length and must 
-                                  contain at least one lowercase, one uppercase, one numeric 
+                                  the node cli must be used to change the password. The password
+                                  specified must be at least 12 characters in length and must
+                                  contain at least one lowercase, one uppercase, one numeric
                                   character and one special character (except quotes)."
                     required: false
                     type: str
@@ -199,29 +199,29 @@ options:
                     type: str
                 cli_password:
                     description: "Password for the node cli user. For deployment, this property
-                                  is required. After deployment, this property is ignored, and 
-                                  the node cli must be used to change the password. The password 
-                                  specified must be at least 12 characters in length and must 
-                                  contain at least one lowercase, one uppercase, one numeric 
+                                  is required. After deployment, this property is ignored, and
+                                  the node cli must be used to change the password. The password
+                                  specified must be at least 12 characters in length and must
+                                  contain at least one lowercase, one uppercase, one numeric
                                   character and one special character (except quotes)."
                     required: false
                     type: str
                 cli_username:
-                    description: "To configure username, you must provide this property together 
+                    description: "To configure username, you must provide this property together
                                   with <b>cli_password</b>."
                     required: false
                     type: str
                 description: "Username and password settings for the node. Note - these settings
-                             will be honored only during node deployment. Post deployment, CLI 
-                             must be used for changing the user settings, changes to these 
+                             will be honored only during node deployment. Post deployment, CLI
+                             must be used for changing the user settings, changes to these
                              parameters will not have any effect."
                 required: true
                 root_password:
                     description: "Password for the node root user. For deployment, this property
                                  is required. After deployment, this property is ignored, and the
-                                 node cli must be used to change the password. The password 
-                                 specified must be at least 12 characters in length and must 
-                                 contain at least one lowercase, one uppercase, one numeric 
+                                 node cli must be used to change the password. The password
+                                 specified must be at least 12 characters in length and must
+                                 contain at least one lowercase, one uppercase, one numeric
                                  character and one special character (except quotes)."
                     required: false
                     type: str
@@ -230,7 +230,7 @@ options:
             type: dict
             vm_deployment_config:
                 ipv4_assignment_enabled:
-                    description: 'Its a boolean flag, if assigned as false then Edge TN would be created using Static 
+                    description: 'Its a boolean flag, if assigned as false then Edge TN would be created using Static
                     Ipv6 only. This field is deprecated.'
                     required: false
                     type: boolean
@@ -242,21 +242,21 @@ options:
                     type: str
                 compute:
                     description: 'The cluster node VM will be deployed on the specified cluster
-                                  or resourcepool for specified VC server. If vc_username and 
+                                  or resourcepool for specified VC server. If vc_username and
                                   vc_password are present then this field takes name else id.'
                     required: true
                     type: str
                 data_networks:
                     description: "List of distributed portgroup or VLAN logical identifiers or names to
-                       which the datapath serving vnics of edge node vm will be connected. If vc_username 
+                       which the datapath serving vnics of edge node vm will be connected. If vc_username
                       and vc_password are present then this field takes names else id."
                     required: true
                     type: list
                 ignore_ssl_connection:
                     description: 'This is a boolean value which will work as a flag to control whether SSL
-                        should be used while connecting to VC or not. 
+                        should be used while connecting to VC or not.
                         If this is True, SSL will not be used to connect to VC.
-                        If the value is False, SSL will be used to connect to the VC. 
+                        If the value is False, SSL will be used to connect to the VC.
                         If this parameter is not specified, then it will be True.'
                     required: false
                     type: boolean
@@ -264,10 +264,10 @@ options:
                     description: 'The default gateway for the VM to be deployed must be specified
                                   if all the other VMs it communicates with are not in the same subnet.
                                   Do not specify this field and management_port_subnets to use DHCP.
-                        
+
                                   Note: only single IPv4 default gateway address is supported and it
                                   must belong to management network.
-                        
+
                                   IMPORTANT: VMs deployed using DHCP are currently not supported,
                                   so this parameter should be specified.'
                     required: false
@@ -281,7 +281,7 @@ options:
                     type: str
                 management_network:
                     description: 'Distributed portgroup identifier to which the management vnic
-                                  of cluster node VM will be connected. If vc_username and vc_password 
+                                  of cluster node VM will be connected. If vc_username and vc_password
                                   are present then this field takes name else id.'
                     required: true
                     type: str
@@ -289,10 +289,10 @@ options:
                     description: 'IP Address and subnet configuration for the management port.
                                   Do not specify this field and default_gateway_addresses to
                                   use DHCP.
-                        
-                                  Note: only one IPv4 address is supported for the management 
+
+                                  Note: only one IPv4 address is supported for the management
                                   port.
-                        
+
                                   IMPORTANT: VMs deployed using DHCP are currently not supported,
                                   so this parameter should be specified.'
                     required: false
@@ -312,7 +312,7 @@ options:
                 type: dict
                 vc_name:
                     description: 'The VC-specific names will be resolved on this VC, so all
-                                  other identifiers specified in the config must belong to this vCenter 
+                                  other identifiers specified in the config must belong to this vCenter
                                   server.'
                     required: true
                     type: str
@@ -404,8 +404,8 @@ options:
                 type: list
         deployment_type:
             description: Specifies whether the service VM should be deployed on each host such
-                          that it provides partner service locally on the host, or whether the 
-                          service VMs can be deployed as a cluster. If deployment_type is 
+                          that it provides partner service locally on the host, or whether the
+                          service VMs can be deployed as a cluster. If deployment_type is
                           CLUSTERED, then the clustered_deployment_count should be provided.
             required: false
             type: str
@@ -467,7 +467,7 @@ options:
         type: dict
     remote_tunnel_endpoint:
         description: Configuration for a remote tunnel endpoin
-        required: False 
+        required: False
         type: 'dict'
         host_switch_name:
             description: The host switch name to be used for the remote tunnel endpoint
@@ -502,7 +502,7 @@ options:
                 required: False
                 type: 'list'
             ip_mac_list:
-                description: List of IPs and MACs for transport node host switch virtual tunnel endpoints 
+                description: List of IPs and MACs for transport node host switch virtual tunnel endpoints
                 required: False
                 type: 'list'
             default_gateway:
@@ -521,7 +521,7 @@ options:
                     description: IPv4 IPv6 address
                     required: False
                     type: 'str'
-    tags: 
+    tags:
         description: Opaque identifiers meaningful to the API user
         required: False
         type: array of Tag
@@ -529,11 +529,11 @@ options:
         choices:
         - present
         - absent
-        description: "State can be either 'present' or 'absent'. 
-                      'present' is used to create or update resource. 
+        description: "State can be either 'present' or 'absent'.
+                      'present' is used to create or update resource.
                       'absent' is used to delete resource."
         required: true
-    
+
 '''
 
 EXAMPLES = '''
@@ -572,8 +572,8 @@ EXAMPLES = '''
         password: "ca$hc0w"
         thumbprint: "e7fd7dd84267da10f991812ca62b2bedea3a4a62965396a04728da1e7f8e1cb9"
     state: "present"
-    
-    
+
+
 - name: Create edge transport nodes
   vmware.ansible_for_nsxt.nsxt_transport_nodes:
     hostname: "{{mgr_0_ip_address}}"
@@ -789,7 +789,7 @@ def cmp_dict(dict1, dict2): # dict1 contain dict2
             continue
         if type(v2) != list and dict1[k2] != dict2[k2]:
             return False
-            
+
         for obj2 in v2:
             for obj1 in dict1[k2]:
                 if all(item in obj1.items() for item in obj2.items()):
@@ -872,7 +872,7 @@ def id_exist_in_list_dict_obj(key, list_obj1, list_obj2):
 
 def check_for_update(module, manager_url, mgr_username, mgr_password, validate_certs, transport_node_with_ids):
     existing_transport_node = get_tn_from_display_name(module, manager_url, mgr_username, mgr_password, validate_certs, transport_node_with_ids['display_name'])
-    
+
     if existing_transport_node is None:
         return False
     if not existing_transport_node.__contains__('description') and transport_node_with_ids.__contains__('description'):
@@ -937,10 +937,10 @@ def inject_vcenter_info(module, manager_url, mgr_username, mgr_password, validat
     vc_name = vm_deployment_config['vc_name']
     vc_ip = get_vc_ip_from_display_name (module, manager_url, mgr_username, mgr_password, validate_certs,
                                          "/fabric/compute-managers", vc_name)
-    
-        
+
+
     vc_username = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('vc_username', None)
-        
+
     vc_password = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('vc_password', None)
 
     if vm_deployment_config.__contains__('host'):
@@ -968,7 +968,7 @@ def inject_vcenter_info(module, manager_url, mgr_username, mgr_password, validat
     data_network_ids = get_data_network_id_from_name(module, vc_ip, vc_username, vc_password,
                                                 data_networks, ignore_ssl_verification)
     transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config']['data_network_ids'] = data_network_ids
-        
+
     if vm_deployment_config.__contains__('host'):
       transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('host', None)
     transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('cluster', None)
@@ -979,12 +979,12 @@ def inject_vcenter_info(module, manager_url, mgr_username, mgr_password, validat
     if vm_deployment_config.__contains__('host'):
       host_id = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('host', None)
       transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config']['host_id'] = host_id
-        
+
     cluster_id = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('compute', None)
     storage_id = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('storage', None)
     management_network_id = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('management_network', None)
     data_network_ids = transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config'].pop('data_networks', None)
-        
+
     transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config']['compute_id'] = cluster_id
     transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config']['storage_id'] = storage_id
     transport_node_params['node_deployment_info']['deployment_config']['vm_deployment_config']['management_network_id'] = management_network_id
@@ -1142,7 +1142,7 @@ def main():
           module.exit_json(changed=True, debug_out=str(json.dumps(body)), id=transport_node_id)
 
       body['_revision'] = revision # update current revision
-      
+
       #update node id with tn id - as result of FN TN unification
       body['node_id'] = transport_node_id
 

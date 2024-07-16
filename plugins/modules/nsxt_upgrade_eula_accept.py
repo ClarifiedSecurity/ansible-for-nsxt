@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 VMware, Inc.
@@ -73,11 +73,11 @@ def main():
   headers = dict(Accept="application/json")
   headers['Content-Type'] = 'application/json'
 
-  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username, 
+  mgr_hostname = get_upgrade_orchestrator_node(module, mgr_hostname, mgr_username,
                                             mgr_password, headers, validate_certs)
 
   manager_url = 'https://{}/api/v1'.format(mgr_hostname)
- 
+
   # Accept the upgrade EULA
 
   if module.check_mode:

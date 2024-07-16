@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Copyright 2021 VMware, Inc.
@@ -60,7 +60,7 @@ options:
         username:
             description: 'Username value of the local manager'
             required: false
-            type: str   
+            type: str
 '''
 
 EXAMPLES = '''
